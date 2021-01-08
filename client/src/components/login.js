@@ -37,8 +37,8 @@ function Login() {
         dispatch(verifyUser(inputs));
       }
       // console.log(window.localStorage.type )
-      else {
-        console.log("inside handlesubmit login", inputs);
+      else if (role = true) {
+        //console.log("inside handlesubmit login", inputs);
         dispatch(verifyDoctor(inputs));
       }
     }

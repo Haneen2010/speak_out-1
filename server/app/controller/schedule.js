@@ -23,5 +23,16 @@ module.exports = {
             if (err) { console.log("you are have an error in schedule controller ") }
             res.json(result);
         })
-    }
+    },
+
+    deleteScheduleSelected: (req, res) => {
+        // var params = [req.body.doctor_Id , req.body.date];
+        console.log(req.params.id, "llllllllllll") //req.body.selectedDate.date, req.body.selectedDate.startTime, req.body.selectedDate.endTime, "llllllllllllllllllllllll")
+        // console.log(req.body)
+        //     var params = [req.params.id, req.params.startTime, req.params.endTime];
+        //     scheduleModel.deleteScheduleSelected(params, function (err, result) {
+        //         if (err) { console.log("you are have an error in schedule controller ") }
+        //         res.send(result);
+        //     })
+    },
 }

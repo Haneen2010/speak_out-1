@@ -7,17 +7,24 @@ export const verifyDoctor = (user) => async (dispatch) => {
         const { data } = await api.verifyDoctor(user);
 
         console.log('returnnnnnnn', data)
-        window.localStorage.setItem("doctorId", data.doctorId);
-        window.localStorage.setItem("doctorName", data.doctorName);
-        dispatch({ type: 'verifyDoctor', payload: data })
+        if (data !== "User doesn't exist") {
+            window.localStorage.setItem("doctorId", data.doctorId);
+            window.localStorage.setItem("doctorName", data.doctorName);
+            dispatch({ type: 'verifyDoctor', payload: data })
 
-        dispatch(AuthDoctor(data))
+            dispatch(AuthDoctor(data))
 
-        swal("YOU ARE LOGGED IN SUCCESSFULLY!", "welcome!", "success");
-        setInterval(function () { window.location = `/doctorProfile/${window.localStorage.doctorId}`; }, 3000);
+            swal("YOU ARE LOGGED IN SUCCESSFULLY!", "welcome!", "success");
+            setInterval(function () { window.location = `/doctorProfile/${window.localStorage.doctorId}`; }, 2000);
+        } else {
+
+            swal("This User Doesn't Exist, Please Enter an Existing Username", { dangerMode: true });
+
+        }
 
     }
     catch (error) {
+        swal("Wrong Password, Please Enter an Existing Passsword", { dangerMode: true });
         console.log('failed')
         console.log(error)
     }
@@ -36,6 +43,7 @@ export const AuthDoctor = (authInputs) => async (dispatch) => {
 
     }
     catch (error) {
+        swal("Wrong Password, Please Enter an Existing Passsword", { dangerMode: true });
         console.log('failed to Auth')
         console.log(error)
     }

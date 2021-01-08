@@ -13,15 +13,17 @@ export const verifyUser = (inputs) => async (dispatch) => {
             dispatch({ type: 'verifyUser', payload: data })
             dispatch(Auth(data))
             swal("YOU ARE LOGGED IN SUCCESSFULLY!", "welcome!", "success");
-            setInterval(function () { window.location = `/userPro/${window.localStorage.userId}`; }, 3000);
+            setInterval(function () { window.location = `/userPro/${window.localStorage.userId}`; }, 2000);
 
         } else {
-            alert("User Doesn't Exist");
+
+            swal("User Doesn't Exist, Please Enter an Existing Username", { dangerMode: true });
+
         }
     }
     catch (error) {
         console.log('failed to verify')
         console.log(error)
-        alert("Wrong Password");
+        swal("Wrong Password, Please Enter an Existing Passsword", { dangerMode: true });
     }
 }

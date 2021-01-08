@@ -42,14 +42,7 @@ function Signup() {
     dispatch(Adduser(user));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (handleValidation()) {
-      handleDis();
-      //console.log( window.localStorage.type)
-      window.location = "/login";
-    }
-  }
+
   function validate() {
     let usernameError = "";
     let ageError = "";
@@ -71,11 +64,9 @@ function Signup() {
     if (!user.gender) {
       genderError =
         "your gender cannot be blank, please write your gender(Male/Female)!";
-    } else if (user.userName.length > 0 && user.userName.length <= 3) {
-      usernameError = "your username cannot be less than 3 characters!";
+    } else if (user.gender !== "male" || user.gender !== "female" || user.gender !== "Female" || user.gender !== "Male") {
+      genderError = "Your gender can only be (Male/Female)";
     }
-
-
     if (!user.email) {
       emailError =
         "your email cannot be blank, please try to write a correct email";
@@ -106,6 +97,18 @@ function Signup() {
     //setUser({user.userName, user.age, user.gender, user.email, user.password})
     return true;
   }
+
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (handleValidation()) {
+      handleDis();
+      //console.log( window.localStorage.type)
+      window.location = "/login";
+    }
+  }
+
+
 
   return (
     <di>
@@ -141,7 +144,7 @@ function Signup() {
             <GiAges size={20} />
             <input
               placeholder="age"
-              type="text"
+              type="number"
               name="age"
               value={user.age}
               onChange={handleChange}

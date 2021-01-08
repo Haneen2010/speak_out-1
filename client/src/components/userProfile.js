@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../actions/adduser";
 import Footer from "./footer";
+import appointmentList from './appointmentList.js'
 
 function UserProfile(props, setCurrentId) {
   //console.log(props)
@@ -230,6 +231,11 @@ function UserProfile(props, setCurrentId) {
         {/* buttons div ends*/}
       </div>
 
+      <div>
+
+        <appointmentList />
+
+      </div>
       {/* footer div */}
       <div
         className="container w-100 mt-5 mb-5"
@@ -242,7 +248,12 @@ function UserProfile(props, setCurrentId) {
         <Footer />
       </div>
       {/* footer div ends*/}
+
+
+
     </div>
+
+
   );
 }
 

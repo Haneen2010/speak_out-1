@@ -5,6 +5,7 @@ import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { bookAppointment } from "../actions/Appointment";
+import moment from 'moment';
 
 const url = "http://localhost:5000";
 
@@ -29,15 +30,24 @@ function BookAppointment(props, { currentId, setCurrrentId }) {
   function handleSchedule(e) {
     const { name, value } = e.target;
     setAppointment((date) => ({ ...date, [name]: value }));
-    // dispatch(getScheduleForUser(currentId))
+    //dispatch(getScheduleForUser(currentId))
     const date = e.target.value;
     console.log(date);
     axios
       .get(`${url}/schedule/getScheduleForUser/${currentId}/${date}`)
       .then((res) => {
         setSchedule({ schedule: res.data });
-        console.log(res.data);
+        //console.log(res.data, res.data.startAt, res.data.endAt, " hhhhhhhhhhhhhhhh");
+        console.log(res.data, " hhhhhhhhhhhhhhhh ");
+        axios
+          .post(`${url}/schedule/deleteScheduleSelected/${currentId}/${res.data}`)///[0].startAt}/${res.data[0].endAt}`)
+          .then((res) => {
+
+            console.log(" hi every one ");
+          });
+
       });
+
   }
 
   function handleChange(e) {
@@ -55,9 +65,10 @@ function BookAppointment(props, { currentId, setCurrrentId }) {
     const userId = window.localStorage.userId;
     console.log(userId);
     dispatch(bookAppointment(currentId, userId, appointmentInfo));
-    window.location = `/appointmentList/${window.localStorage.userId}`;
+    //window.location = `/appointmentList/${window.localStorage.userId}`;
     // `<Redirect to={{ pathname: '/appointmentList/'+${window.localStorage.userId}, state: { from: ${props.location } }}/>`
   }
+
   return (
     <div className="col-lg-8 offset-lg-2">
       <h2>BOOK Appointment</h2>
@@ -79,6 +90,7 @@ function BookAppointment(props, { currentId, setCurrrentId }) {
               value={appointmentInfo.date}
               id="example-date-input"
               onChange={handleSchedule}
+              min={moment().format("YYYY-MM-DD")}
             />
           </div>
         </div>

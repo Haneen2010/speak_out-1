@@ -22,4 +22,15 @@ module.exports = {
             callback(err, result)
         })
     },
+
+    deleteScheduleSelected: (params, callback) => {
+        // var query = 'Select * from schedule  where doctor_Id = ? ';
+        // var query = 'Select * from schedule  where doctor_Id = ? and date = ?;';
+        var queryStr = 'Delete from schedule where doctor_Id = ? and date = ? ;';
+        //and startAt = ? and endAt =?;';
+        db.query(queryStr, params, function (err, result) {
+            console.log("deleeeeeeeeeeeeeete")
+            callback(err, result)
+        })
+    },
 }

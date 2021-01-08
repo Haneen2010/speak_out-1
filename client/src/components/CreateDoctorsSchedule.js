@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-//import DatePicker from "react-datepicker";
+import scheduleForDoctor from './scheduleForDoctor'
 
-import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
+//import "react-datepicker/dist/react-datepicker.css";
 function CreateDoctorsSchedule() {
   const [selectedDate, setSelectedDate] = useState({
     doctorId: "",
@@ -12,7 +13,7 @@ function CreateDoctorsSchedule() {
     endTime: "",
   });
 
-  //const [today, setDate] = useState(new Date());
+  const [today, setDate] = useState(new Date());
 
   const handleChange = (name) => (event) => {
     setSelectedDate({ ...selectedDate, [name]: event.target.value });
@@ -29,10 +30,14 @@ function CreateDoctorsSchedule() {
       )
       .then((res) => {
         console.log(res, " this is a res from post image");
+        window.location = `/scheduleForDoctor/${window.localStorage.doctorId}`;
       })
       .catch((err) => {
         console.log("there is an errrrrrrrooooorrrr", err);
       });
+
+
+
   }
   return (
     <div className="col-lg-8 offset-lg-2">
@@ -51,9 +56,13 @@ function CreateDoctorsSchedule() {
             value={selectedDate.date}
             selected={selectedDate}
             onChange={handleChange("date")}
+            min={moment().format("YYYY-MM-DD")}
             dateFormat="yyyy/MM/dd"
+
           />
         </div>
+
+
         <div className="form-group">
           <label for="str">startTime:</label>
           <input
@@ -78,6 +87,9 @@ function CreateDoctorsSchedule() {
           Add to the Schedule{" "}
         </button>
       </form>
+      <div>
+        <scheduleForDoctor />
+      </div>
     </div>
   );
 }

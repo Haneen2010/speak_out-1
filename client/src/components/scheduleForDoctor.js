@@ -19,7 +19,7 @@ function ScheduleForDoctor() {
       .then((res) => {
         setDoctorSchedule({ schedules: res.data });
 
-        console.log(res.data);
+        console.log(res.data, "jjjjjjjjjjjjjjj");
         console.log(doctorSchedule.schedules[0]);
       })
       .catch((err) => {
