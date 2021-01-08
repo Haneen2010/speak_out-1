@@ -17,6 +17,8 @@ This website is basically built because the psychological health for people arou
 ​
 ​<img src= "client/src/components/newLogo.PNG" width = "100">
 ![](client/src/components/newLogo.PNG)
+
+
 ​
 Technologies built with:
   - Backend:
